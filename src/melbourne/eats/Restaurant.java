@@ -20,6 +20,7 @@ public class Restaurant {
     private final HashMap<String, Double> foodItems = new LinkedHashMap<>();
 
     protected static final DecimalFormat df = new DecimalFormat("0.00");
+    protected static final DecimalFormat dfInt = new DecimalFormat("0.#");
 
     /*
      * Code sourced and adapted from:

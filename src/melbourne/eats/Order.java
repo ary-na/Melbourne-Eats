@@ -7,19 +7,21 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import static melbourne.eats.Restaurant.df;
+import static melbourne.eats.Restaurant.dfInt;
+
 public class Order {
 
-    private String restaurantName;
-    private HashMap<String, Double> foodItems = new LinkedHashMap<>();
-    private Double deliveryFee;
-    private static HashMap<Integer[], Integer> discounts = new HashMap<>();
+    private final String restaurantName;
+    private LinkedHashMap<String, Double[]> foodItems = new LinkedHashMap<>();
+    private final Double deliveryFee;
+    private static final HashMap<Integer[], Integer> discounts = new HashMap<>();
     protected static int minNumOfRestaurantsInOrder;
     protected static double deliveryDiscountPercentage;
-    protected static ArrayList<Integer> quantity = new ArrayList<>();
 
-    Order(String restaurantName, HashMap<String, Double> foodItems, Double deliveryFee) {
+    Order(String restaurantName, HashMap<String, Double[]> foodItems, Double deliveryFee) {
         this.restaurantName = restaurantName;
-        this.foodItems = foodItems;
+        this.foodItems = (LinkedHashMap<String, Double[]>) foodItems;
         this.deliveryFee = deliveryFee;
     }
 
@@ -42,12 +44,11 @@ public class Order {
 //    }
 
     protected void displayOrder() {
-        System.out.println(this.restaurantName);
+        System.out.printf("\n%s", this.restaurantName);
         for (String key : foodItems.keySet()) {
-            System.out.println(key + " - $" + foodItems.get(key));
-        }
-        System.out.println("$" + this.deliveryFee);
-        System.out.println(Arrays.toString(quantity.toArray()));
-        System.out.println();
+                System.out.printf("\n%-2s %-44s %s", dfInt.format(foodItems.get(key)[1]), key, "$" + df.format(foodItems.get(key)[0] * foodItems.get(key)[1]));
+            }
+        System.out.printf("\n%-47s %s", "Delivery fee", "$" + df.format(this.deliveryFee));
+        System.out.printf("\n%s", "-------------------------------------------------------");
     }
 }

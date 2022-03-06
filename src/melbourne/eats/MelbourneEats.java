@@ -3,7 +3,7 @@ package melbourne.eats;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Locale;
 
 import static helper.Menu.*;
@@ -82,9 +82,9 @@ public class MelbourneEats {
         do {
             int counter = 1;
             selectedRestaurant.clear();
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             System.out.printf("\n%-2s %s", ">", "Select from matching list");
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             for (Restaurant restaurant : restaurants) {
                 if (restaurant.getRestaurantName().toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))) {
                     System.out.printf("\n%-2s %s", counter + ")", restaurant.getRestaurantName());
@@ -106,6 +106,12 @@ public class MelbourneEats {
     }
 
     private static void checkout() {
+        System.out.printf("\n%s", "-------------------------------------------------------");
+        System.out.printf("\n%-2s %s", ">", "You have ordered the following items");
+        System.out.printf("\n%s", "-------------------------------------------------------");
+
+
+
     }
 
     // Display restaurants based on selected category
@@ -118,9 +124,9 @@ public class MelbourneEats {
 
             int counter = 1;
             selectedRestaurant.clear();
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             System.out.printf("\n%-2s %s", ">", "Select from restaurant list");
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             for (Restaurant restaurant : restaurants) {
 
                 if (restaurant.getRestaurantCategory().equals(category)) {
@@ -148,16 +154,17 @@ public class MelbourneEats {
     private static void displayFoodMenu(@NotNull Restaurant restaurant) {
 
         int selection;
-        int quantity;
-        HashMap<String, Double> foodItem = new HashMap<>();
+        int quantity = 0;
+        LinkedHashMap<String, Double[]> foodItem = new LinkedHashMap<>();
         ArrayList<Integer> foodItemQuantity = new ArrayList<>();
+
 
         do {
 
             int counter = 1;
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             System.out.printf("\n%-2s %s", ">", "Select a food item from " + restaurant.getRestaurantName());
-            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%s", "-------------------------------------------------------");
             for (String key : restaurant.getFoodItems().keySet()) {
                 System.out.printf("\n%-2s %-44s %s", counter + ")", key, df.format(restaurant.getFoodItems().get(key)));
                 counter++;
@@ -165,9 +172,9 @@ public class MelbourneEats {
             System.out.printf("\n%-2s %s", counter + ")", "No more");
 
             selection = Integer.parseInt(getInput("\n\nPlease select:"));
+
             if (selection != restaurant.getFoodItems().size() + 1) {
                 quantity = Integer.parseInt(getInput(("Please enter an amount:")));
-                Order.quantity.add(quantity);
             }
 
             /*
@@ -182,7 +189,7 @@ public class MelbourneEats {
                 if (i == (selection - 1)) {
                     String key = (String) restaurant.getFoodItems().keySet().toArray()[i];
                     Double value = (Double) restaurant.getFoodItems().values().toArray()[i];
-                    foodItem.put(key, value);
+                    foodItem.put(key, new Double[]{value, (double) quantity});
                 }
             }
 
