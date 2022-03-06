@@ -2,8 +2,9 @@ package melbourne.eats;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.security.Key;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Locale;
 
 import static helper.Menu.*;
 import static melbourne.eats.ReadFile.*;
@@ -74,28 +75,35 @@ public class MelbourneEats {
      */
     private static void searchByRestaurant() {
 
-//        String input = getInput("Please enter a restaurant name:");
-//
-//        for (Restaurant restaurant : restaurants) {
-//            String restaurantName = restaurant.getRestaurantName();
-//            if(restaurantName.toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))){
-//                System.out.println(restaurantName);
-//            }
-//        }
+        ArrayList<Restaurant> selectedRestaurant = new ArrayList<>();
+        String input = getInput("Please enter a restaurant name:");
+        int selection;
 
-//        for (Restaurant restaurant : restaurants) {
-//            restaurant.displayRestaurant();
-//        }
+        do {
+            int counter = 1;
+            selectedRestaurant.clear();
+            System.out.printf("\n%s", "-----------------------------------------------------");
+            System.out.printf("\n%-2s %s", ">", "Select from matching list");
+            System.out.printf("\n%s", "-----------------------------------------------------");
+            for (Restaurant restaurant : restaurants) {
+                if (restaurant.getRestaurantName().toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))) {
+                    System.out.printf("\n%-2s %s", counter + ")", restaurant.getRestaurantName());
+                    counter++;
+                    selectedRestaurant.add(restaurant);
+                }
+            }
+            System.out.printf("\n%-2s %s", counter + ")", "Go to main menu");
+
+            selection = Integer.parseInt(getInput("\n\nPlease select:"));
+
+            for (int i = 0; i < selectedRestaurant.size(); i++) {
+
+                if (i == (selection - 1)) {
+                    displayFoodMenu(selectedRestaurant.get(i));
+                }
+            }
+        } while (selection > selectedRestaurant.size() + 1);
     }
-
-
-//    protected static Restaurants getRestaurant(String category) {
-//            if (Objects.equals(Restaurants.getRestaurantCategory(), category)) {
-//                return restaurant;
-//        }
-//        return null;
-//    }
-
 
     private static void checkout() {
     }
@@ -157,7 +165,7 @@ public class MelbourneEats {
             System.out.printf("\n%-2s %s", counter + ")", "No more");
 
             selection = Integer.parseInt(getInput("\n\nPlease select:"));
-            if(selection != restaurant.getFoodItems().size() + 1){
+            if (selection != restaurant.getFoodItems().size() + 1) {
                 quantity = Integer.parseInt(getInput(("Please enter an amount:")));
                 Order.quantity.add(quantity);
             }
@@ -183,27 +191,9 @@ public class MelbourneEats {
         Order order = new Order(restaurant.getRestaurantName(), foodItem, restaurant.getDeliveryFee());
         orders.add(order);
 
-        for(Order f1: orders){
+        for (Order f1 : orders) {
             f1.displayOrder();
         }
 
-    }
-
-
-    private static void browseRestaurants(@NotNull Restaurant restaurant) {
-        String selection;
-
-        int counter = 1;
-        do {
-            selection = getInput("\n\nPlease select:");
-            for (String key : restaurant.getFoodItems().keySet()) {
-                System.out.println(key + " - $" + df.format(restaurant.getFoodItems().get(key)));
-                counter++;
-            }
-        } while (counter == 0);
-
-//        for (String key : restaurant.getFoodItems().keySet()) {
-//            System.out.println(key + " - $" + df.format(restaurant.getFoodItems().get(key)));
-//        }
     }
 }
