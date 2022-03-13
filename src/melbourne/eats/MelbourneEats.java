@@ -1,3 +1,5 @@
+package melbourne.eats;
+
 /*
  * MelbourneEats.java - Main Class
  * The system keeps a list of restaurants where users can order their food from.
@@ -5,7 +7,6 @@
  * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 13, 2022
  */
 
-package melbourne.eats;
 
 import java.util.ArrayList;
 import java.util.Locale;

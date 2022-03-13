@@ -1,12 +1,12 @@
 Assignment 1 - Further Programming 
-
+---
 The system keeps a list of restaurants where users can order their food from. It allows the user to order from different restaurants and receive discounts on the combined order. The list of restaurants is provided in Restaurants.txt file and discount information is provided in Discounts.txt file.
 
 Minimum requirements --> Java 15 or higher
 
 To run the program: 
-
-Run the executable Melbourne-Eats.jar file from the command prompt. To run the executable, navigate to:
+---
+Method 1: Run the executable Melbourne-Eats.jar file from the command prompt. To run the executable, navigate to:
 
 Melbourne-Eats -> out -> artifacts -> Melbourne_Eats_jar
 
@@ -14,10 +14,26 @@ And run the following command
 
 java -jar Melbourne-Eats.jar 
 
+---
+Method 2: Compile and run the program using the terminal. To compile and run the program, navigate to:
+
+Melbourne-Eats -> src -> melbourne -> eats
+
+And run the following command:
+
+javac *.java
+
+Navigate back to src and run the following command
+
+java melbourne.eats.MelbourneEats
+
+
+---
 Alternatively, import the project to IntelliJ IDEA and run the program from the IDE.
 
+---
 References
-
+---
 Baao, 2022. Java RegEx split method. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/40688462/java-regex-split-method> [Accessed 13 March 2022].
 
 Bajpai, V., 2022. Split() String method in Java with examples - GeeksforGeeks. [online] GeeksforGeeks. Available at: <https://www.geeksforgeeks.org/split-string-java-examples/> [Accessed 11 March 2022].
