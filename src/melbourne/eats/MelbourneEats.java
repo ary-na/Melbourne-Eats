@@ -1,18 +1,12 @@
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.Locale;
 
-import static helper.Menu.*;
+import static melbourne.eats.Helper.*;
 import static melbourne.eats.ReadFile.*;
-import static melbourne.eats.Restaurant.df;
 
 public class MelbourneEats {
-
-    private static ArrayList<Order> orders = new ArrayList<>();
 
     public static void main(String[] args) {
         getRestaurantsFromTextFile();
@@ -44,7 +38,6 @@ public class MelbourneEats {
         System.exit(0);
     }
 
-
     /*
      * Code sourced and adapted from:
      * https://www.baeldung.com/java-foreach-counter
@@ -63,6 +56,8 @@ public class MelbourneEats {
                 case "1" -> displayRestaurants("Restaurant");
                 case "2" -> displayRestaurants("Cafe");
                 case "3" -> displayRestaurants("Fast food");
+                case "4" -> processMenu();
+                default -> System.err.println("Please select a valid menu option.");
             }
 
         } while (!selection.equals("4"));
@@ -75,132 +70,81 @@ public class MelbourneEats {
      */
     private static void searchByRestaurant() {
 
-        ArrayList<Restaurant> selectedRestaurant = new ArrayList<>();
+        ArrayList<Provider> selectedProvider = new ArrayList<>();
         String input = getInput("Please enter a restaurant name:");
         int selection;
 
         do {
             int counter = 1;
-            selectedRestaurant.clear();
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            System.out.printf("\n%-2s %s", ">", "Select from matching list");
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            for (Restaurant restaurant : restaurants) {
-                if (restaurant.getRestaurantName().toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))) {
-                    System.out.printf("\n%-2s %s", counter + ")", restaurant.getRestaurantName());
+            selectedProvider.clear();
+            System.out.printf("%n%s", banner);
+            System.out.printf("%n%-2s %s", ">", "Select from matching list");
+            System.out.printf("%n%s", banner);
+            for (Provider provider : providers) {
+                if (provider.getProviderName().toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))) {
+                    System.out.printf("%n%-2s %s", counter + ")", provider.getProviderName());
                     counter++;
-                    selectedRestaurant.add(restaurant);
+                    selectedProvider.add(provider);
                 }
             }
-            System.out.printf("\n%-2s %s", counter + ")", "Go to main menu");
+            System.out.printf("%n%-2s %s", counter + ")", "Go to main menu");
 
             selection = Integer.parseInt(getInput("\n\nPlease select:"));
 
-            for (int i = 0; i < selectedRestaurant.size(); i++) {
+            for (int i = 0; i < selectedProvider.size(); i++) {
 
                 if (i == (selection - 1)) {
-                    displayFoodMenu(selectedRestaurant.get(i));
+                    displayFoodMenu(selectedProvider.get(i));
                 }
             }
-        } while (selection > selectedRestaurant.size() + 1);
+        } while (selection > selectedProvider.size() + 1);
     }
 
     private static void checkout() {
-        System.out.printf("\n%s", "-------------------------------------------------------");
-        System.out.printf("\n%-2s %s", ">", "You have ordered the following items");
-        System.out.printf("\n%s", "-------------------------------------------------------");
 
+        double discount = 0;
+        double savedAmount = 0;
+        double subtotal = 0;
 
+        if (orders.size() == 0) {
+            System.err.println("You did not order any items");
+            processMenu();
+        } else {
 
-    }
+            System.out.printf("%n%s", banner);
+            System.out.printf("%n%-2s %s", ">", "You have ordered the following items");
+            System.out.printf("%n%s", banner);
 
-    // Display restaurants based on selected category
-    private static void displayRestaurants(String category) {
+            for (Order order : orders) {
+                order.displayOrder();
+                subtotal += order.getTotal();
+                deliveryFee += order.getDeliveryFee();
+            }
 
-        int selection;
-        ArrayList<Restaurant> selectedRestaurant = new ArrayList<>();
-
-        do {
-
-            int counter = 1;
-            selectedRestaurant.clear();
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            System.out.printf("\n%-2s %s", ">", "Select from restaurant list");
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            for (Restaurant restaurant : restaurants) {
-
-                if (restaurant.getRestaurantCategory().equals(category)) {
-
-                    System.out.printf("\n%-2s %s", counter + ")", restaurant.getRestaurantName());
-                    counter++;
-                    selectedRestaurant.add(restaurant);
+            for (Double[] key : Order.discounts.keySet()) {
+                if (subtotal >= key[0] && subtotal < key[1]) {
+                    discount = subtotal * (Order.discounts.get(key) / 100);
                 }
             }
-            System.out.printf("\n%-2s %s", counter + ")", "Go to main menu");
+            subtotal -= discount;
 
-            selection = Integer.parseInt(getInput("\n\nPlease select:"));
-
-            for (int i = 0; i < selectedRestaurant.size(); i++) {
-
-                if (i == (selection - 1)) {
-                    displayFoodMenu(selectedRestaurant.get(i));
-                }
+            if (orders.size() >= Order.minNumOfRestaurantsInOrder) {
+                deliveryFee *= (Order.deliveryDiscountPercentage / 100);
+                savedAmount += deliveryFee;
             }
 
-        } while (selection > selectedRestaurant.size() + 1);
-    }
+            total = subtotal + deliveryFee;
+            savedAmount += discount;
 
-    // Display food menu for the selected restaurant
-    private static void displayFoodMenu(@NotNull Restaurant restaurant) {
-
-        int selection;
-        int quantity = 0;
-        LinkedHashMap<String, Double[]> foodItem = new LinkedHashMap<>();
-        ArrayList<Integer> foodItemQuantity = new ArrayList<>();
-
-
-        do {
-
-            int counter = 1;
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            System.out.printf("\n%-2s %s", ">", "Select a food item from " + restaurant.getRestaurantName());
-            System.out.printf("\n%s", "-------------------------------------------------------");
-            for (String key : restaurant.getFoodItems().keySet()) {
-                System.out.printf("\n%-2s %-44s %s", counter + ")", key, df.format(restaurant.getFoodItems().get(key)));
-                counter++;
-            }
-            System.out.printf("\n%-2s %s", counter + ")", "No more");
-
-            selection = Integer.parseInt(getInput("\n\nPlease select:"));
-
-            if (selection != restaurant.getFoodItems().size() + 1) {
-                quantity = Integer.parseInt(getInput(("Please enter an amount:")));
-            }
-
-            /*
-             * Code sourced and adapted from:
-             * https://www.youtube.com/watch?v=ISQv2lbJZoY
-             * https://www.educba.com/iterator-in-java/
-             * https://stackoverflow.com/questions/1090556/java-how-to-convert-hashmapstring-object-to-array
-             * https://rotadev.com/java-how-to-convert-hashmapstring-object-to-array-dev/
-             */
-
-            for (int i = 0; i < restaurant.getFoodItems().size(); i++) {
-                if (i == (selection - 1)) {
-                    String key = (String) restaurant.getFoodItems().keySet().toArray()[i];
-                    Double value = (Double) restaurant.getFoodItems().values().toArray()[i];
-                    foodItem.put(key, new Double[]{value, (double) quantity});
-                }
-            }
-
-        } while (selection != restaurant.getFoodItems().size() + 1);
-
-        Order order = new Order(restaurant.getRestaurantName(), foodItem, restaurant.getDeliveryFee());
-        orders.add(order);
-
-        for (Order f1 : orders) {
-            f1.displayOrder();
+            System.out.printf("\n%-47s %s", "Order price:", "$" + df.format(subtotal));
+            System.out.printf("\n%-47s %s", "Delivery fee:", "$" + df.format(deliveryFee));
+            System.out.printf("\n%-47s %s", "You have saved:", "$" + df.format(savedAmount));
+            System.out.printf("\n%-47s %s", "Total amount to pay", "$" + df.format(total));
+            System.out.printf("%n%s", banner);
+            System.out.print("\nThanks for ordering with Melbourne Eats. Enjoy your meal.");
+            sc.close();
+            WriteFile.writeOrdersToFile();
+            System.exit(0);
         }
-
     }
 }
