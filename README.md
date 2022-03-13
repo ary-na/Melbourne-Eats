@@ -4,9 +4,15 @@ The system keeps a list of restaurants where users can order their food from. It
 
 Minimum requirements --> Java 15 or higher
 
-To install: 
+To run the program: 
 
-Compile the program using the Terminal and run the program. Alternatively, import the project to Eclipse/IntelliJ IDEA and run the program from the IDE.
+Run the executable Melbourne-Eats.jar file from the command prompt. To run the executable, navigate to:
+
+Melbourne-Eats -> out -> artifacts -> Melbourne_Eats_jar
+And run the following command
+java -jar Melbourne-Eats.jar 
+
+Alternatively, import the project to IntelliJ IDEA and run the program from the IDE.
 
 References
 
