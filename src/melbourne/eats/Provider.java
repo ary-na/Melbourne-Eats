@@ -1,9 +1,17 @@
+/*
+ * Provider.java - Abstract Class
+ * The class allows creating objects of the class subclasses
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 13, 2022
+ */
+
 package melbourne.eats;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.LinkedHashMap;
 
+// Provider abstract class
 public abstract class Provider {
 
     /*
@@ -13,7 +21,6 @@ public abstract class Provider {
      */
 
     private final String providerName;
-    private final String category;
     private final double deliveryFee;
     private final LinkedHashMap<String, Double> foodItems = new LinkedHashMap<>();
 
@@ -26,27 +33,17 @@ public abstract class Provider {
     // Construct an object from file
     protected Provider(String @NotNull [] line) {
         this.providerName = line[0];
-        this.category = line[1];
         this.deliveryFee = Double.parseDouble(line[2]);
         for (int i = 3; i < (line.length - 1); i += 2) {
             this.foodItems.put(line[i].substring(0, line[i].length() - 1).trim(), Double.parseDouble(line[i + 1]));
         }
     }
 
-    protected String getProviderName() {
-        return this.providerName;
-    }
+    // Get methods
+    protected String getProviderName() { return this.providerName; }
 
-    protected String getProviderCategory() {
-        return this.category;
-    }
+    protected Double getDeliveryFee() { return this.deliveryFee; }
 
-    protected Double getDeliveryFee() {
-        return this.deliveryFee;
-    }
-
-    protected LinkedHashMap<String, Double> getFoodItems() {
-        return this.foodItems;
-    }
+    protected LinkedHashMap<String, Double> getFoodItems() { return this.foodItems; }
 }
 

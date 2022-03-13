@@ -1,3 +1,10 @@
+/*
+ * Order.java - Order Class
+ * The class allows creating order objects
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 13, 2022
+ */
+
 package melbourne.eats;
 
 import org.jetbrains.annotations.NotNull;
@@ -7,33 +14,28 @@ import java.util.LinkedHashMap;
 
 import static melbourne.eats.Helper.*;
 
+// Order class
 public class Order {
 
+    // Instance variables
     private final String restaurantName;
     private final LinkedHashMap<String, Double[]> foodItems;
     private final double deliveryFee;
     private double total;
+
+    // Class variables
     protected static final LinkedHashMap<Double[], Double> discounts = new LinkedHashMap<>();
     protected static int minNumOfRestaurantsInOrder;
     protected static double deliveryDiscountPercentage;
 
+    // Class constructor
     Order(String restaurantName, LinkedHashMap<String, Double[]> foodItems, Double deliveryFee) {
         this.restaurantName = restaurantName;
         this.foodItems = foodItems;
         this.deliveryFee = deliveryFee;
     }
 
-    protected static void setDiscountsDetails(String @NotNull [] fsc) {
-        if (fsc.length == 4) {
-            Order.discounts.put(new Double[]{Double.valueOf(fsc[1]), Double.valueOf(fsc[2])}, Double.valueOf(fsc[3]));
-        } else if (fsc.length == 3) {
-            Order.discounts.put(new Double[]{Double.valueOf(fsc[1]), Double.MAX_VALUE}, Double.valueOf(fsc[2]));
-        } else {
-            minNumOfRestaurantsInOrder = Integer.parseInt(fsc[0]);
-            deliveryDiscountPercentage = Integer.parseInt(fsc[1]);
-        }
-    }
-
+    // Get methods
     protected double getDeliveryFee() {
         return this.deliveryFee;
     }
@@ -46,19 +48,33 @@ public class Order {
         return this.total;
     }
 
+    // Set discount details read from file
+    protected static void setDiscountsDetails(String @NotNull [] line) {
+        if (line.length == 4) {
+            Order.discounts.put(new Double[]{Double.valueOf(line[1]), Double.valueOf(line[2])}, Double.valueOf(line[3]));
+        } else if (line.length == 3) {
+            Order.discounts.put(new Double[]{Double.valueOf(line[1]), Double.MAX_VALUE}, Double.valueOf(line[2]));
+        } else {
+            minNumOfRestaurantsInOrder = Integer.parseInt(line[0]);
+            deliveryDiscountPercentage = Integer.parseInt(line[1]);
+        }
+    }
+
+    // Display order
     protected void displayOrder() {
         System.out.printf("\n%s", this.restaurantName);
-        for (String key : foodItems.keySet()) {
-            System.out.printf("\n%-2s %-44s %s", dfInt.format(foodItems.get(key)[1]), key, "$" + df.format(foodItems.get(key)[0] * foodItems.get(key)[1]));
+        for (String key : this.foodItems.keySet()) {
+            System.out.printf("\n%-2s %-44s %s", dfInt.format(this.foodItems.get(key)[1]), key, "$" + df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
         }
         System.out.printf("\n%-47s %s", "Delivery fee", "$" + df.format(this.deliveryFee));
         System.out.printf("%n%s", banner);
     }
 
-    protected void writeOrder(PrintWriter pw) {
+    // Write order to Order.txt file
+    protected void writeOrder(@NotNull PrintWriter pw) {
         pw.printf("\n%s", this.restaurantName);
-        for (String key : foodItems.keySet()) {
-            pw.printf("\n%-2s %-44s %s", dfInt.format(foodItems.get(key)[1]), key, "$" + df.format(foodItems.get(key)[0] * foodItems.get(key)[1]));
+        for (String key : this.foodItems.keySet()) {
+            pw.printf("\n%-2s %-44s %s", dfInt.format(this.foodItems.get(key)[1]), key, "$" + df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
         }
         pw.printf("\n%-47s %s", "Delivery fee", "$" + df.format(this.deliveryFee));
         pw.printf("%n%s", banner);

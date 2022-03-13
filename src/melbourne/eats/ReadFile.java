@@ -1,14 +1,21 @@
+/*
+ * ReadFile.java - ReadFile class
+ * Read from file and create objects
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 13, 2022
+ */
+
 package melbourne.eats;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class ReadFile {
+import static melbourne.eats.Helper.providers;
 
-    protected static final ArrayList<Provider> providers = new ArrayList<>();
+// ReadFile class
+public class ReadFile {
 
     /*
      * Code sourced and adapted from:
@@ -26,26 +33,30 @@ public class ReadFile {
     // Read file Restaurants.txt/Restaurants-2022.txt and create Restaurant objects
     protected static void getRestaurantsFromTextFile() {
         try {
-            Provider provider = null;
+            Provider provider;
             Scanner fsc = new Scanner(new File("Restaurants-2022.txt"));
             while (fsc.hasNext()) {
+                // Create line array
                 String[] line = fsc.nextLine().split("[,$]+");
-                String[] removedNull = Arrays.stream(line)
+                // Re-create line array and remove null and empty elements
+                String[] lineRemovedNull = Arrays.stream(line)
                         .filter(value ->
                                 value != null && value.length() > 0 && !value.equals(" ")
                         )
                         .toArray(String[]::new);
 
-                String providerType = removedNull[1].trim();
+                String providerType = lineRemovedNull[1].trim();
                 if (providerType.equals("Restaurant")) {
-                    provider = new Restaurant(removedNull);
+                    provider = new Restaurant(lineRemovedNull);
                 } else if (providerType.equals("Cafe")) {
-                    provider = new Cafe(removedNull);
+                    provider = new Cafe(lineRemovedNull);
                 } else {
-                    provider = new FastFood(removedNull);
+                    provider = new FastFood(lineRemovedNull);
                 }
+                // Add objects of the Provider class to arraylist providers
                 providers.add(provider);
             }
+            // Close scanner object
             fsc.close();
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist.");
@@ -58,8 +69,10 @@ public class ReadFile {
             Scanner fsc = new Scanner(new File("Discounts.txt"));
             while (fsc.hasNext()) {
                 String[] line = fsc.nextLine().split("[\\[\\],)%]+");
+                // Set discount details
                 Order.setDiscountsDetails(line);
             }
+            // Close scanner object
             fsc.close();
         } catch (FileNotFoundException e) {
             System.err.println("File does not exist.");

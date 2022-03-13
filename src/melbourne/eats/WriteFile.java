@@ -1,6 +1,11 @@
-package melbourne.eats;
+/*
+ * WriteFile.java - WriteFile class
+ * Write orders to Order.txt file
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 13, 2022
+ */
 
-import org.jetbrains.annotations.NotNull;
+package melbourne.eats;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,6 +23,7 @@ public class WriteFile {
         try {
             PrintWriter pw = new PrintWriter(new FileWriter("Orders.txt", true));
             for (Order order : orders) {
+                // Write each order to file
                 order.writeOrder(pw);
             }
             pw.printf("\n%-47s %s", "Delivery fee:", "$" + df.format(deliveryFee));
