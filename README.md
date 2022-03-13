@@ -2,6 +2,12 @@ Assignment 1 - Further Programming
 
 The system keeps a list of restaurants where users can order their food from. It allows the user to order from different restaurants and receive discounts on the combined order. The list of restaurants is provided in Restaurants.txt file and discount information is provided in Discounts.txt file.
 
+Minimum requirments --> Java 17 or higher
+
+To install: 
+
+Compile the program using the Terminal and run the program. Alternatively, import the project to Eclipse/IntelliJ IDEA and run the program from the IDE.
+
 References
 
 Baao, 2022. Java RegEx split method. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/40688462/java-regex-split-method> [Accessed 13 March 2022].
