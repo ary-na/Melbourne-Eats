@@ -17,7 +17,6 @@ public abstract class Provider {
     /*
      * Code sourced and adapted from:
      * https://www.educba.com/associative-array-in-java/
-     * https://mkyong.com/java/java-display-double-in-2-decimal-points/
      */
 
     private final String providerName;

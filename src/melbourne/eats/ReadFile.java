@@ -26,7 +26,6 @@ public class ReadFile {
      * https://stackoverflow.com/questions/8141698/split-using-a-bracket
      * https://stackoverflow.com/questions/40688462/java-regex-split-method
      * https://codegym.cc/groups/posts/stringsplit-method-in-java
-     * https://stackoverflow.com/questions/8141698/split-using-a-bracket
      * https://makeinjava.com/remove-null-empty-string-array-lambda-stream-java8-example/
      */
 
