@@ -7,8 +7,6 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -108,7 +106,7 @@ public class Helper {
     }
 
     // Display food menu for the selected restaurant
-    protected static void displayFoodMenu(@NotNull Provider provider) {
+    protected static void displayFoodMenu(Provider provider) {
 
         int selection = 0;
         int quantity = 0;

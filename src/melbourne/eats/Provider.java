@@ -7,8 +7,6 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.LinkedHashMap;
 
 // Provider abstract class
@@ -30,7 +28,7 @@ public abstract class Provider {
      */
 
     // Construct an object from file
-    protected Provider(String @NotNull [] line) {
+    protected Provider(String [] line) {
         this.providerName = line[0];
         this.deliveryFee = Double.parseDouble(line[2]);
         for (int i = 3; i < (line.length - 1); i += 2) {

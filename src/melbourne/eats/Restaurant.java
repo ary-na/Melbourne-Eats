@@ -6,11 +6,9 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 // Restaurant class
 public class Restaurant extends Provider {
-    Restaurant(String @NotNull [] line) {
+    Restaurant(String [] line) {
         super(line);
     }
 }

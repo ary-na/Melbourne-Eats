@@ -7,8 +7,6 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 
@@ -49,7 +47,7 @@ public class Order {
     }
 
     // Set discount details read from file
-    protected static void setDiscountsDetails(String @NotNull [] line) {
+    protected static void setDiscountsDetails(String [] line) {
         if (line.length == 4) {
             Order.discounts.put(new Double[]{Double.valueOf(line[1]), Double.valueOf(line[2])}, Double.valueOf(line[3]));
         } else if (line.length == 3) {
@@ -71,7 +69,7 @@ public class Order {
     }
 
     // Write order to Order.txt file
-    protected void writeOrder(@NotNull PrintWriter pw) {
+    protected void writeOrder(PrintWriter pw) {
         pw.printf("\n%s", this.restaurantName);
         for (String key : this.foodItems.keySet()) {
             pw.printf("\n%-2s %-44s %s", dfInt.format(this.foodItems.get(key)[1]), key, "$" + df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));

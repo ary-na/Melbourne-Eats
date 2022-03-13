@@ -6,9 +6,7 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 // Cafe class
 public class Cafe extends Provider {
-    Cafe(String @NotNull [] line) { super(line); }
+    Cafe(String [] line) { super(line); }
 }

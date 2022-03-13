@@ -6,9 +6,7 @@
 
 package melbourne.eats;
 
-import org.jetbrains.annotations.NotNull;
-
 // Fast food class
 public class FastFood extends Provider {
-    FastFood(String @NotNull [] line) { super(line); }
+    FastFood(String [] line) { super(line); }
 }
