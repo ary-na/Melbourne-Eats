@@ -10,15 +10,12 @@ package melbourne.eats;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import static melbourne.eats.Helper.*;
-import static melbourne.eats.ReadFile.*;
-
 public class MelbourneEats {
 
     // Main
     public static void main(String[] args) {
-        getRestaurantsFromTextFile();
-        getDiscountsFromTextFile();
+        ReadFile.getRestaurantsFromTextFile();
+        ReadFile.getDiscountsFromTextFile();
         processMenu();
     }
 
@@ -26,8 +23,8 @@ public class MelbourneEats {
     public static void processMenu() {
         String selection;
         do {
-            displayMainMenu();
-            selection = getInput("\n\nPlease select:");
+            Helper.displayMainMenu();
+            selection = Helper.getInput("\n\nPlease select:");
             switch (selection) {
                 case "1" -> browseByCategory();
                 case "2" -> searchByRestaurant();
@@ -36,7 +33,7 @@ public class MelbourneEats {
                 default -> System.err.println("Please select a valid menu option.");
             }
         } while (!selection.equals("4"));
-        sc.close();
+        Helper.sc.close();
 
         /*
          * Code sourced and adapted from:
@@ -57,13 +54,13 @@ public class MelbourneEats {
         String selection;
         do {
 
-            displayCategoryMenu();
-            selection = getInput("\n\nPlease select:");
+            Helper.displayCategoryMenu();
+            selection = Helper.getInput("\n\nPlease select:");
 
             switch (selection) {
-                case "1" -> displayRestaurants("Restaurant");
-                case "2" -> displayRestaurants("Cafe");
-                case "3" -> displayRestaurants("FastFood");
+                case "1" -> Helper.displayRestaurants("Restaurant");
+                case "2" -> Helper.displayRestaurants("Cafe");
+                case "3" -> Helper.displayRestaurants("FastFood");
                 case "4" -> processMenu();
                 default -> System.err.println("Please select a valid menu option.");
             }
@@ -83,16 +80,16 @@ public class MelbourneEats {
         ArrayList<Provider> selectedProvider = new ArrayList<>();
 
         // Get input
-        String input = getInput("Please enter a restaurant name:");
+        String input = Helper.getInput("Please enter a restaurant name:");
         int selection;
 
         do {
             int counter = 1;
             selectedProvider.clear();
-            System.out.printf("%n%s", banner);
+            System.out.printf("%n%s", Helper.banner);
             System.out.printf("%n%-2s %s", ">", "Select from matching list");
-            System.out.printf("%n%s", banner);
-            for (Provider provider : providers) {
+            System.out.printf("%n%s", Helper.banner);
+            for (Provider provider : Helper.providers) {
                 // Display providers that contain input on condition
                 if (provider.getProviderName().toLowerCase(Locale.ROOT).contains(input.toLowerCase(Locale.ROOT))) {
                     System.out.printf("%n%-2s %s", counter + ")", provider.getProviderName());
@@ -110,13 +107,13 @@ public class MelbourneEats {
             System.out.printf("%n%-2s %s", counter + ")", "Go to main menu");
 
             // Get input
-            selection = Integer.parseInt(getInput("\n\nPlease select:"));
+            selection = Integer.parseInt(Helper.getInput("\n\nPlease select:"));
 
             // Display food menu based on input
             for (int i = 0; i < selectedProvider.size(); i++) {
 
                 if (i == (selection - 1)) {
-                    displayFoodMenu(selectedProvider.get(i));
+                    Helper.displayFoodMenu(selectedProvider.get(i));
                 }
             }
         } while (selection > selectedProvider.size() + 1);
@@ -130,20 +127,20 @@ public class MelbourneEats {
         double subtotal = 0;
 
         // Run the menu on condition - orders arraylist is empty
-        if (orders.size() == 0) {
+        if (Helper.orders.size() == 0) {
             System.err.println("You did not order any items");
             processMenu();
         } else {
 
-            System.out.printf("%n%s", banner);
+            System.out.printf("%n%s", Helper.banner);
             System.out.printf("%n%-2s %s", ">", "You have ordered the following items");
-            System.out.printf("%n%s", banner);
+            System.out.printf("%n%s", Helper.banner);
 
             // For each order, get the total and delivery fee, and calculate the sum
-            for (Order order : orders) {
+            for (Order order : Helper.orders) {
                 order.displayOrder();
                 subtotal += order.getTotal();
-                deliveryFee += order.getDeliveryFee();
+                Helper.deliveryFee += order.getDeliveryFee();
             }
 
             // Get discount details and calculate discount
@@ -156,24 +153,24 @@ public class MelbourneEats {
             subtotal -= discount;
 
             // Calculate delivery fee discount on condition
-            if (orders.size() >= Order.minNumOfRestaurantsInOrder) {
-                deliveryFee *= (Order.deliveryDiscountPercentage / 100);
-                savedAmount += deliveryFee;
+            if (Helper.orders.size() >= Order.minNumOfRestaurantsInOrder) {
+                Helper.deliveryFee *= (Order.deliveryDiscountPercentage / 100);
+                savedAmount += Helper.deliveryFee;
             }
 
             // calculate the total and saved amount
-            total = subtotal + deliveryFee;
+            Helper.total = subtotal + Helper.deliveryFee;
             savedAmount += discount;
 
             // Display
-            System.out.printf("\n%-47s %s", "Order price:", "$" + df.format(subtotal));
-            System.out.printf("\n%-47s %s", "Delivery fee:", "$" + df.format(deliveryFee));
-            System.out.printf("\n%-47s %s", "You have saved:", "$" + df.format(savedAmount));
-            System.out.printf("\n%-47s %s", "Total amount to pay", "$" + df.format(total));
-            System.out.printf("%n%s", banner);
+            System.out.printf("\n%-47s %s", "Order price:", "$" + Helper.df.format(subtotal));
+            System.out.printf("\n%-47s %s", "Delivery fee:", "$" + Helper.df.format(Helper.deliveryFee));
+            System.out.printf("\n%-47s %s", "You have saved:", "$" + Helper.df.format(savedAmount));
+            System.out.printf("\n%-47s %s", "Total amount to pay", "$" + Helper.df.format(Helper.total));
+            System.out.printf("%n%s", Helper.banner);
             System.out.print("\nThanks for ordering with Melbourne Eats. Enjoy your meal.");
             // Close scanner object
-            sc.close();
+            Helper.sc.close();
             // Write to file
             WriteFile.writeOrdersToFile();
             // Exit

@@ -10,8 +10,6 @@ package melbourne.eats;
 import java.io.PrintWriter;
 import java.util.LinkedHashMap;
 
-import static melbourne.eats.Helper.*;
-
 // Order class
 public class Order {
 
@@ -62,19 +60,19 @@ public class Order {
     protected void displayOrder() {
         System.out.printf("\n%s", this.restaurantName);
         for (String key : this.foodItems.keySet()) {
-            System.out.printf("\n%-2s %-44s %s", dfInt.format(this.foodItems.get(key)[1]), key, "$" + df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
+            System.out.printf("\n%-2s %-44s %s", Helper.dfInt.format(this.foodItems.get(key)[1]), key, "$" + Helper.df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
         }
-        System.out.printf("\n%-47s %s", "Delivery fee", "$" + df.format(this.deliveryFee));
-        System.out.printf("%n%s", banner);
+        System.out.printf("\n%-47s %s", "Delivery fee", "$" + Helper.df.format(this.deliveryFee));
+        System.out.printf("%n%s", Helper.banner);
     }
 
     // Write order to Order.txt file
     protected void writeOrder(PrintWriter pw) {
         pw.printf("\n%s", this.restaurantName);
         for (String key : this.foodItems.keySet()) {
-            pw.printf("\n%-2s %-44s %s", dfInt.format(this.foodItems.get(key)[1]), key, "$" + df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
+            pw.printf("\n%-2s %-44s %s", Helper.dfInt.format(this.foodItems.get(key)[1]), key, "$" + Helper.df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
         }
-        pw.printf("\n%-47s %s", "Delivery fee", "$" + df.format(this.deliveryFee));
-        pw.printf("%n%s", banner);
+        pw.printf("\n%-47s %s", "Delivery fee", "$" + Helper.df.format(this.deliveryFee));
+        pw.printf("%n%s", Helper.banner);
     }
 }
