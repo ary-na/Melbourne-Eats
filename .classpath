@@ -4,5 +4,5 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="var" path="MAVEN_REPOSITORY/org/jetbrains/annotations/20.1.0/annotations-20.1.0.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/junit.jupiter"/>
-	<classpathentry kind="output" path="out/production/Melbourne-Eats"/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
