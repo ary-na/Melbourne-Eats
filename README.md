@@ -9,7 +9,9 @@ To run the program:
 Run the executable Melbourne-Eats.jar file from the command prompt. To run the executable, navigate to:
 
 Melbourne-Eats -> out -> artifacts -> Melbourne_Eats_jar
+
 And run the following command
+
 java -jar Melbourne-Eats.jar 
 
 Alternatively, import the project to IntelliJ IDEA and run the program from the IDE.
