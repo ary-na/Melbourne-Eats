@@ -2,7 +2,7 @@ Assignment 1 - Further Programming
 
 The system keeps a list of restaurants where users can order their food from. It allows the user to order from different restaurants and receive discounts on the combined order. The list of restaurants is provided in Restaurants.txt file and discount information is provided in Discounts.txt file.
 
-Minimum requirements --> Java 17 or higher
+Minimum requirements --> Java 15 or higher
 
 To install: 
 
