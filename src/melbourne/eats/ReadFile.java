@@ -30,7 +30,7 @@ public class ReadFile {
      */
 
     // Read file Restaurants.txt/Restaurants-2022.txt and create Restaurant objects
-    protected static void getRestaurantsFromTextFile() {
+    public static void getRestaurantsFromTextFile() {
         try {
             Provider provider;
             Scanner fsc = new Scanner(new File("Restaurants-2022.txt"));

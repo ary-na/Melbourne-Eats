@@ -25,7 +25,7 @@ public class Order {
     protected static double deliveryDiscountPercentage;
 
     // Class constructor
-    Order(String restaurantName, LinkedHashMap<String, Double[]> foodItems, Double deliveryFee) {
+    public Order(String restaurantName, LinkedHashMap<String, Double[]> foodItems, Double deliveryFee) {
         this.restaurantName = restaurantName;
         this.foodItems = foodItems;
         this.deliveryFee = deliveryFee;
@@ -36,7 +36,7 @@ public class Order {
         return this.deliveryFee;
     }
 
-    protected double getTotal() {
+    public double getTotal() {
         for (String key : foodItems.keySet()) {
             double subtotal = foodItems.get(key)[0] * foodItems.get(key)[1];
             this.total += subtotal;

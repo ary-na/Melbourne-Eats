@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import static melbourne.eats.MelbourneEats.processMenu;
+
 // Helper class - Provide functionality to other classes
 public class Helper {
 
@@ -100,13 +102,16 @@ public class Helper {
                 if (i == (selection - 1)) {
                     displayFoodMenu(selectedProvider.get(i));
                 }
+                else {
+                    processMenu();
+                }
             }
 
         } while (selection > selectedProvider.size() + 1);
     }
 
     // Display food menu for the selected restaurant
-    protected static void displayFoodMenu(Provider provider) {
+    public static void displayFoodMenu(Provider provider) {
 
         int selection = 0;
         int quantity = 0;

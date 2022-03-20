@@ -8,5 +8,5 @@ package melbourne.eats;
 
 // Cafe class
 public class Cafe extends Provider {
-    Cafe(String [] line) { super(line); }
+    public Cafe(String[] line) { super(line); }
 }

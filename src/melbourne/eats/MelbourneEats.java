@@ -50,7 +50,7 @@ public class MelbourneEats {
      */
 
     // Browse restaurants by category
-    private static void browseByCategory() {
+    public static void browseByCategory() {
 
         String selection;
         do {

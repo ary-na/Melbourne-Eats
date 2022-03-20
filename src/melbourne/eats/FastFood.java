@@ -8,5 +8,5 @@ package melbourne.eats;
 
 // Fast food class
 public class FastFood extends Provider {
-    FastFood(String [] line) { super(line); }
+    public FastFood(String[] line) { super(line); }
 }
