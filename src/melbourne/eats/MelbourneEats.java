@@ -11,6 +11,8 @@ package melbourne.eats;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import static melbourne.eats.Helper.*;
+
 public class MelbourneEats {
 
     // Main
@@ -121,55 +123,48 @@ public class MelbourneEats {
     }
 
     // Checkout
-    private static void checkout() {
-
-        double discount = 0;
-        double savedAmount = 0;
-        double subtotal = 0;
+    public static void checkout() {
 
         // Run the menu on condition - orders arraylist is empty
         if (Helper.orders.size() == 0) {
             System.err.println("You did not order any items");
             processMenu();
         } else {
+            double savedAmount = 0;
+            double deliveryFee = calculateDeliveryFee(Helper.orders);
+            double subtotal = calculateSubtotal(Helper.orders);
+            double discount = calculateDiscount(subtotal);
 
             System.out.printf("%n%s", Helper.banner);
             System.out.printf("%n%-2s %s", ">", "You have ordered the following items");
             System.out.printf("%n%s", Helper.banner);
 
-            // For each order, get the total and delivery fee, and calculate the sum
+            // For each order, get the total and delivery fee
             for (Order order : Helper.orders) {
                 order.displayOrder();
-                subtotal += order.getTotal();
                 Helper.deliveryFee += order.getDeliveryFee();
             }
 
-            // Get discount details and calculate discount
-            for (Double[] key : Order.discounts.keySet()) {
-                if (subtotal >= key[0] && subtotal < key[1]) {
-                    discount = subtotal * (Order.discounts.get(key) / 100);
-                }
-            }
             // Subtract the discount from subtotal and reassign subtotal
             subtotal -= discount;
 
-            // Calculate delivery fee discount on condition
-            if (Helper.orders.size() >= Order.minNumOfRestaurantsInOrder) {
-                Helper.deliveryFee *= (Order.deliveryDiscountPercentage / 100);
-                savedAmount += Helper.deliveryFee;
-            }
-
             // calculate the total and saved amount
-            Helper.total = subtotal + Helper.deliveryFee;
-            savedAmount += discount;
+            Helper.total = subtotal + deliveryFee;
+            savedAmount = discount;
+
+            // Calculate delivery fee discount on condition
+            if (orders.size() >= Order.minNumOfRestaurantsInOrder) {
+                savedAmount = discount + deliveryFee;
+            }
 
             // Display
             System.out.printf("\n%-47s %s", "Order price:", "$" + Helper.df.format(subtotal));
-            System.out.printf("\n%-47s %s", "Delivery fee:", "$" + Helper.df.format(Helper.deliveryFee));
+            System.out.printf("\n%-47s %s", "Delivery fee:", "$" + Helper.df.format(deliveryFee));
             System.out.printf("\n%-47s %s", "You have saved:", "$" + Helper.df.format(savedAmount));
             System.out.printf("\n%-47s %s", "Total amount to pay", "$" + Helper.df.format(Helper.total));
             System.out.printf("%n%s", Helper.banner);
             System.out.print("\nThanks for ordering with Melbourne Eats. Enjoy your meal.");
+
             // Close scanner object
             Helper.sc.close();
             // Write to file

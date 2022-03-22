@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Scanner;
 
+import static melbourne.eats.Helper.orders;
 import static melbourne.eats.MelbourneEats.processMenu;
+import static melbourne.eats.ReadFile.getDiscountsFromTextFile;
 
 // Helper class - Provide functionality to other classes
 public class Helper {
@@ -101,8 +103,7 @@ public class Helper {
 
                 if (i == (selection - 1)) {
                     displayFoodMenu(selectedProvider.get(i));
-                }
-                else {
+                } else if (selection == counter) {
                     processMenu();
                 }
             }
@@ -186,5 +187,48 @@ public class Helper {
             Order order = new Order(provider.getProviderName(), foodItem, provider.getDeliveryFee());
             orders.add(order);
         }
+
+        if (selection == provider.getFoodItems().size() + 1) {
+            processMenu();
+        }
+    }
+
+    public static double calculateSubtotal(ArrayList<Order> orders) {
+        double subtotal = 0;
+
+        // For each order, get the total and delivery fee, and calculate the sum
+        for (Order order : orders) {
+            subtotal += order.getTotal();
+        }
+        return subtotal;
+    }
+
+    public static double calculateDiscount(double subtotal) {
+        getDiscountsFromTextFile();
+        double discount = 0;
+
+        // Get discount details and calculate discount
+        for (Double[] key : Order.discounts.keySet()) {
+            if (subtotal >= key[0] && subtotal < key[1]) {
+                discount = subtotal * (Order.discounts.get(key) / 100);
+            }
+        }
+        return discount;
+    }
+
+    public static double calculateDeliveryFee(ArrayList<Order> orders) {
+        getDiscountsFromTextFile();
+        double deliveryFeeDiscount = 0;
+        for (Order order : orders) {
+            Helper.deliveryFee += order.getDeliveryFee();
+        }
+
+        // Calculate delivery fee discount on condition
+        if (orders.size() >= Order.minNumOfRestaurantsInOrder) {
+            deliveryFeeDiscount = Helper.deliveryFee * (Order.deliveryDiscountPercentage / 100);
+            Helper.deliveryFee -= deliveryFeeDiscount;
+        }
+
+        return Helper.deliveryFee;
     }
 }

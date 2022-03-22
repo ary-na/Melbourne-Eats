@@ -45,7 +45,7 @@ public class Order {
     }
 
     // Set discount details read from file
-    protected static void setDiscountsDetails(String [] line) {
+    protected static void setDiscountsDetails(String[] line) {
         if (line.length == 4) {
             Order.discounts.put(new Double[]{Double.valueOf(line[1]), Double.valueOf(line[2])}, Double.valueOf(line[3]));
         } else if (line.length == 3) {

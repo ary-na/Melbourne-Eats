@@ -34,21 +34,22 @@ public class ProviderTest {
     }
 
     @Test
-    public void testProviderObject() {
+    public void testCafeObject() {
         assertNotNull(cafe);
+    }
+
+    @Test
+    public void testFastFoodObject() {
         assertNotNull(fastFood);
+    }
+
+    @Test
+    public void testRestaurantObject() {
         assertNotNull(restaurant);
     }
 
     @Test
-    public void testGetDelivery() {
-        assertEquals(5.00, cafe.getDeliveryFee());
-        assertEquals(10.00, fastFood.getDeliveryFee());
-        assertEquals(0, restaurant.getDeliveryFee());
-    }
-
-    @Test
-    public void testGetFoodItems(){
+    public void testGetFoodItems() {
         assertNotNull(cafe.getFoodItems());
     }
 }
