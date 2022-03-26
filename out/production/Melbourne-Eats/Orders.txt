@@ -195,3 +195,21 @@ Total amount to pay                             $109.80
 -------------------------------------------------------
 
 
+
+Just Salads R.
+3  Chick Peas Wrap                              $30.00
+6  Veggie Paradise                              $72.00
+2  Coconut Water                                $5.00
+Delivery fee                                    $6.00
+-------------------------------------------------------
+Tea House
+2  Chocolate Mousse                             $15.00
+5  Tiramisu                                     $40.00
+5  Green Tea                                    $17.50
+Delivery fee                                    $4.00
+-------------------------------------------------------
+Delivery fee:                                   $15.00
+Total amount to pay                             $148.60
+-------------------------------------------------------
+
+

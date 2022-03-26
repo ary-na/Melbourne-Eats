@@ -1,3 +1,9 @@
+/*
+ * ProviderTest.java - Test Class
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 23, 2022
+ */
+
 package melbourne.eats.test;
 
 import melbourne.eats.Cafe;
@@ -33,6 +39,7 @@ public class ProviderTest {
         restaurant = null;
     }
 
+    // Test provider objects
     @Test
     public void testCafeObject() {
         assertNotNull(cafe);
@@ -48,6 +55,7 @@ public class ProviderTest {
         assertNotNull(restaurant);
     }
 
+    // Test food items for a provider object
     @Test
     public void testGetFoodItems() {
         assertNotNull(cafe.getFoodItems());

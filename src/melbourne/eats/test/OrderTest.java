@@ -1,3 +1,9 @@
+/*
+ * OrderTest.java - Test Class
+ *
+ * author Arian Najafi Yamchelo - s3910902@student.rmit.edu.au version 1.0 date March 23, 2022
+ */
+
 package melbourne.eats.test;
 
 import melbourne.eats.Order;
@@ -59,6 +65,7 @@ public class OrderTest {
         subTotal = null;
     }
 
+    // Test objects
     @Test
     public void testOrder1Object() {
         assertNotNull(order1);
@@ -69,16 +76,19 @@ public class OrderTest {
         assertNotNull(order2);
     }
 
+    // Test total for an order object
     @Test
     public void testGetTotal() {
         assertEquals(46.00, order1.getTotal(), 0.00);
     }
 
+    // Test subtotal for all orders
     @Test
     public void testCalculateSubtotal() {
         assertEquals(182.00, calculateSubtotal(orders), 0.00);
     }
 
+    // Test discount amount for a subtotal
     @Test
     public void testCalculateDiscountZeroPercent() {
         assertEquals(0.00, calculateDiscount(subTotal[0]), 0.00);
@@ -104,6 +114,7 @@ public class OrderTest {
         assertEquals(10.00, calculateDiscount(subTotal[4]), 0.00);
     }
 
+    // Test delivery fee discount
     @Test
     public void testCalculateDeliveryFeeWithDiscount(){
         assertEquals(7.50, calculateDeliveryFee(orders), 0.00);

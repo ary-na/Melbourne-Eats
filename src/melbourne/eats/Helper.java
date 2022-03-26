@@ -70,7 +70,6 @@ public class Helper {
         System.out.printf("%n%-2s %s", "4)", "Go to main menu");
     }
 
-
     // Display providers based on selected category
     protected static void displayRestaurants(String category) {
 
@@ -193,17 +192,20 @@ public class Helper {
         }
     }
 
+    // Calculate subtotal of orders
     public static double calculateSubtotal(ArrayList<Order> orders) {
         double subtotal = 0;
 
-        // For each order, get the total and delivery fee, and calculate the sum
+        // For each order, get the total, and calculate the sum
         for (Order order : orders) {
             subtotal += order.getTotal();
         }
         return subtotal;
     }
 
+    // Calculate discount amount of  an order subtotal
     public static double calculateDiscount(double subtotal) {
+        // Reading discounts for unit test
         getDiscountsFromTextFile();
         double discount = 0;
 
@@ -216,9 +218,12 @@ public class Helper {
         return discount;
     }
 
+    // Calculate delivery fee discount
     public static double calculateDeliveryFee(ArrayList<Order> orders) {
+        // Reading discounts for unit test
         getDiscountsFromTextFile();
         double deliveryFeeDiscount = 0;
+        // For each order, get the delivery fee, and calculate the sum
         for (Order order : orders) {
             Helper.deliveryFee += order.getDeliveryFee();
         }
@@ -228,7 +233,6 @@ public class Helper {
             deliveryFeeDiscount = Helper.deliveryFee * (Order.deliveryDiscountPercentage / 100);
             Helper.deliveryFee -= deliveryFeeDiscount;
         }
-
         return Helper.deliveryFee;
     }
 }
