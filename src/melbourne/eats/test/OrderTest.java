@@ -6,8 +6,7 @@
 
 package melbourne.eats.test;
 
-import melbourne.eats.Helper;
-import melbourne.eats.Order;
+import melbourne.eats.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

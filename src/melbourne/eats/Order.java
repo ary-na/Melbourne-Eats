@@ -18,7 +18,7 @@ public class Order {
     private final LinkedHashMap<Integer, LinkedHashMap<String, Double[]>> foodItems;
     private final double deliveryFee;
     private double total;
-    protected int OrderID;
+    protected int orderID;
 
     // Class variables
     protected static final LinkedHashMap<Double[], Double> discounts = new LinkedHashMap<>();
@@ -31,7 +31,7 @@ public class Order {
         this.restaurantName = restaurantName;
         this.foodItems = foodItems;
         this.deliveryFee = deliveryFee;
-        this.OrderID = defaultOrderID;
+        this.orderID = defaultOrderID;
         defaultOrderID++;
     }
 
@@ -83,6 +83,7 @@ public class Order {
     // Write order to Order.txt file
     protected void writeOrder(PrintWriter pw) {
 
+        pw.printf("\n%-47s %s", "Order No.", this.orderID);
         pw.printf("\n%s", this.restaurantName);
         this.foodItems.forEach((orderNo, foodItem) -> {
             foodItem.forEach((food, priceAndQuantity) -> {
