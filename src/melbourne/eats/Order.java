@@ -15,20 +15,24 @@ public class Order {
 
     // Instance variables
     private final String restaurantName;
-    private final LinkedHashMap<String, Double[]> foodItems;
+    private final LinkedHashMap<Integer, LinkedHashMap<String, Double[]>> foodItems;
     private final double deliveryFee;
     private double total;
+    protected int OrderID;
 
     // Class variables
     protected static final LinkedHashMap<Double[], Double> discounts = new LinkedHashMap<>();
     protected static int minNumOfRestaurantsInOrder;
     protected static double deliveryDiscountPercentage;
+    protected static int defaultOrderID = 1000;
 
     // Class constructor
-    public Order(String restaurantName, LinkedHashMap<String, Double[]> foodItems, Double deliveryFee) {
+    public Order(String restaurantName, LinkedHashMap<Integer, LinkedHashMap<String, Double[]>> foodItems, Double deliveryFee) {
         this.restaurantName = restaurantName;
         this.foodItems = foodItems;
         this.deliveryFee = deliveryFee;
+        this.OrderID = defaultOrderID;
+        defaultOrderID++;
     }
 
     // Get methods
@@ -36,11 +40,18 @@ public class Order {
         return this.deliveryFee;
     }
 
+    /*
+     * Code sourced and adapted from:
+     * https://stackoverflow.com/questions/26188532/iterate-through-nested-hashmap
+     */
     public double getTotal() {
-        for (String key : foodItems.keySet()) {
-            double subtotal = foodItems.get(key)[0] * foodItems.get(key)[1];
-            this.total += subtotal;
-        }
+
+        foodItems.forEach((orderNo, foodItem) -> {
+            foodItem.forEach((food, priceAndQuantity) -> {
+                double subtotal = foodItem.get(food)[0] * foodItem.get(food)[1];
+                this.total += subtotal;
+            });
+        });
         return this.total;
     }
 
@@ -58,20 +69,26 @@ public class Order {
 
     // Display order
     protected void displayOrder() {
+
         System.out.printf("\n%s", this.restaurantName);
-        for (String key : this.foodItems.keySet()) {
-            System.out.printf("\n%-2s %-44s %s", Helper.dfInt.format(this.foodItems.get(key)[1]), key, "$" + Helper.df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
-        }
+        this.foodItems.forEach((orderNo, foodItem) -> {
+            foodItem.forEach((food, priceAndQuantity) -> {
+                System.out.printf("\n%-2s %-44s %s", Helper.dfInt.format(foodItem.get(food)[1]), food, "$" + Helper.df.format(foodItem.get(food)[0] * foodItem.get(food)[1]));
+            });
+        });
         System.out.printf("\n%-47s %s", "Delivery fee", "$" + Helper.df.format(this.deliveryFee));
         System.out.printf("%n%s", Helper.banner);
     }
 
     // Write order to Order.txt file
     protected void writeOrder(PrintWriter pw) {
+
         pw.printf("\n%s", this.restaurantName);
-        for (String key : this.foodItems.keySet()) {
-            pw.printf("\n%-2s %-44s %s", Helper.dfInt.format(this.foodItems.get(key)[1]), key, "$" + Helper.df.format(this.foodItems.get(key)[0] * this.foodItems.get(key)[1]));
-        }
+        this.foodItems.forEach((orderNo, foodItem) -> {
+            foodItem.forEach((food, priceAndQuantity) -> {
+                pw.printf("\n%-2s %-44s %s", Helper.dfInt.format(foodItem.get(food)[1]), food, "$" + Helper.df.format(foodItem.get(food)[0] * foodItem.get(food)[1]));
+            });
+        });
         pw.printf("\n%-47s %s", "Delivery fee", "$" + Helper.df.format(this.deliveryFee));
         pw.printf("%n%s", Helper.banner);
     }

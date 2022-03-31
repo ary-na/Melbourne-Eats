@@ -115,8 +115,8 @@ public class Helper {
 
         int selection = 0;
         int quantity = 0;
-        LinkedHashMap<String, Double[]> foodItem = new LinkedHashMap<>();
-
+        LinkedHashMap<Integer, LinkedHashMap<String, Double[]>> foodItem = new LinkedHashMap<>();
+        int foodItemNo = 1;
         do {
             int counter = 1;
             System.out.printf("%n%s", banner);
@@ -166,6 +166,8 @@ public class Helper {
              * https://www.educba.com/iterator-in-java/
              * https://stackoverflow.com/questions/1090556/java-how-to-convert-hashmapstring-object-to-array
              * https://rotadev.com/java-how-to-convert-hashmapstring-object-to-array-dev/
+             * https://stackoverflow.com/questions/14425826/variable-is-accessed-within-inner-class-needs-to-be-declared-final
+             * https://stackoverflow.com/questions/14582596/how-to-put-get-values-into-from-nested-hashmap
              */
 
             // Put selected food items and quantity for each item to foodItem linkedHashMap
@@ -175,7 +177,9 @@ public class Helper {
                     String key = (String) provider.getFoodItems().keySet().toArray()[i];
                     Double value = (Double) provider.getFoodItems().values().toArray()[i];
 
-                    foodItem.put(key, new Double[]{value, (double) quantity});
+                    int finalQuantity = quantity;
+                    foodItem.put(foodItemNo, new LinkedHashMap<>(){{put(key, new Double[]{value, (double) finalQuantity});}});
+                    foodItemNo++;
                 }
             }
 

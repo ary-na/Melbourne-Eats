@@ -39,7 +39,7 @@ public abstract class Provider {
     // Get methods
     protected String getProviderName() { return this.providerName; }
 
-    public Double getDeliveryFee() { return this.deliveryFee; }
+    protected Double getDeliveryFee() { return this.deliveryFee; }
 
     public LinkedHashMap<String, Double> getFoodItems() { return this.foodItems; }
 }
