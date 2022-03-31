@@ -26,7 +26,6 @@ public class WriteFile {
                 // Write each order to file
                 order.writeOrder(pw);
             }
-            pw.printf("\n%-47s %s", "Delivery fee:", "$" + df.format(deliveryFee));
             pw.printf("\n%-47s %s", "Total amount to pay", "$" + df.format(total));
             pw.printf("%n%s", banner);
             pw.println("\n\n");
