@@ -40,7 +40,7 @@ javac melbourne/eats/*.java
 java melbourne.eats.MelbourneEats
 ```
 
-###Alternatively, import the project to [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?fromIDE=#section=mac) and run the program from the IDE.
+**Alternatively, import the project to [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?fromIDE=#section=mac) and run the program from the IDE.**
 
 ## To run the Unit test:
 
