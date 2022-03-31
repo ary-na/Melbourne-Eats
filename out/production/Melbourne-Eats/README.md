@@ -42,8 +42,40 @@ java melbourne.eats.MelbourneEats
 
 **Alternatively, import the project to [IntelliJ IDEA](https://www.jetbrains.com/idea/download/?fromIDE=#section=mac) and run the program from the IDE.**
 
-## To run the Unit test:
+## To run the Unit tests:
 
+Using command prompt navigate to:
+
+
+```
+Melbourne-Eats/src
+```
+
+And compile the test.java files on Linux or macOs, using the following command:
+
+```
+javac -cp .:melbourne/eats/test/junit-4.13.1.jar:melbourne/eats/test/hamcrest-core-1.3.jar melbourne/eats/test/*.java
+```
+
+And on Windows:
+```
+javac -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-core-1.3.jar melbourne/eats/test/*.java
+```
+
+
+And run the test classes on Linux ot macOS using the following commands:
+
+```
+java -cp .:melbourne/eats/test/junit-4.13.1.jar:melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.OrderTest
+java -cp .:melbourne/eats/test/junit-4.13.1.jar:melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.ProviderTest
+```
+
+And on Windows:
+
+```
+java -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.OrderTest
+java -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.ProviderTest
+```
 
 
 ## References
@@ -84,6 +116,8 @@ Pasarin, L., 2022. Using multiple delimiters with scanner - Java. [online] Stack
 
 Pedamkar, P., 2022. Iterator in Java | Retrieving Elements Using the Iterator Method. [online] EDUCBA. Available at: <https://www.educba.com/iterator-in-java/> [Accessed 13 March 2022].
 
+Philipp, M., 2022. Getting started · junit-team/junit4 Wiki. [online] GitHub. Available at: <https://github.com/junit-team/junit4/wiki/Getting-started> [Accessed 31 March 2022].
+
 Pietzcker, T., 2022. Escaping Parentheses in Regex. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/23659747/escaping-parentheses-in-regex> [Accessed 13 March 2022].
 
 Rotadev.com. 2022. Java: how to convert HashMap<String, Object> to array – Dev – RotaDEV.com. [online] Available at: <https://rotadev.com/java-how-to-convert-hashmapstring-object-to-array-dev/> [Accessed 12 March 2022].
@@ -93,6 +127,8 @@ Saalam, S., 2022. HashMap Iterator. [online] Youtube.com. Available at: <https:/
 sanbhat, 2022. Ignore case for 'contains' for a string in Java. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/16604765/ignore-case-for-contains-for-a-string-in-java> [Accessed 13 March 2022].
 
 Shar1er80, 2022. Read data from a text file and create an object. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/30564462/read-data-from-a-text-file-and-create-an-object> [Accessed 13 March 2022].
+
+VHS, 2022. Junit Error: initializationError(org.junit.runner.JUnitCommandLineParseResult). [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/42430188/junit-error-initializationerrororg-junit-runner-junitcommandlineparseresult> [Accessed 31 March 2022].
 
 Zhao, K. and L, B., 2022. Variable is accessed within inner class. Needs to be declared final. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/14425826/variable-is-accessed-within-inner-class-needs-to-be-declared-final> [Accessed 30 March 2022].
 
