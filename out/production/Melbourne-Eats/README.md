@@ -1,14 +1,14 @@
 # Assignment 1 - Further Programming
 
-The system keeps a list of restaurants where users can order their food from. It allows the user to order from different restaurants and receive discounts on the combined order. The list of restaurants is provided in Restaurants.txt file and discount information is provided in Discounts.txt file.
+The system keeps a list of restaurants from which users can order their food. It allows users to order from different restaurants and receive discounts on the combined order. The restaurant's list is provided in the Restaurants.txt file, and discount information is provided in the Discounts.txt file.
 
 - Minimum requirements: _Java 15 or higher_
 
 ## To run the program:
 
-**Method 1** - Run the executable Melbourne-Eats.jar file from the command prompt.
+**Method 1** - Run the executable Melbourne-Eats.jar file using the command prompt.
 
-**1.1.** To run the executable jar file, navigate to:
+**1.1.** To run the executable jar file, using the command prompt, navigate to:
 
 ```
 Melbourne-Eats/out/artifacts/Melbourne_Eats_jar
@@ -19,7 +19,7 @@ Melbourne-Eats/out/artifacts/Melbourne_Eats_jar
 ```
 java -jar Melbourne-Eats.jar 
 ```
-
+\
 **Method 2** - Compile and run the program using the command prompt.
 
 **2.1.** To compile and run the program, navigate to:
@@ -44,26 +44,25 @@ java melbourne.eats.MelbourneEats
 
 ## To run the Unit tests:
 
-Using command prompt navigate to:
-
+Using the command prompt navigate to:
 
 ```
 Melbourne-Eats/src
 ```
 
-And compile the test.java files on Linux or macOs, using the following command:
+And compile the test.java files on Linux or macOS using the following command:
 
 ```
 javac -cp .:melbourne/eats/test/junit-4.13.1.jar:melbourne/eats/test/hamcrest-core-1.3.jar melbourne/eats/test/*.java
 ```
 
 And on Windows:
+
 ```
 javac -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-core-1.3.jar melbourne/eats/test/*.java
 ```
 
-
-And run the test classes on Linux ot macOS using the following commands:
+And run the test classes using the corresponding command for each test file on Linux or macOS using the following commands:
 
 ```
 java -cp .:melbourne/eats/test/junit-4.13.1.jar:melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.OrderTest
@@ -77,12 +76,13 @@ java -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-cor
 java -cp .;melbourne/eats/test/junit-4.13.1.jar;melbourne/eats/test/hamcrest-core-1.3.jar org.junit.runner.JUnitCore melbourne.eats.test.ProviderTest
 ```
 
-
 ## References
 
 Baao, 2022. Java RegEx split method. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/40688462/java-regex-split-method> [Accessed 13 March 2022].
 
 Bajpai, V., 2022. Split() String method in Java with examples - GeeksforGeeks. [online] GeeksforGeeks. Available at: <https://www.geeksforgeeks.org/split-string-java-examples/> [Accessed 11 March 2022].
+
+Baydan, İ., 2022. How To Add New Line In Markdown? – WiseTut. [online] Wisetut.com. Available at: <https://wisetut.com/how-to-add-new-line-in-markdown/> [Accessed 31 March 2022].
 
 Chauhan, K., 2022. Split using a bracket. [online] Stack Overflow. Available at: <https://stackoverflow.com/questions/8141698/split-using-a-bracket> [Accessed 13 March 2022].
 
