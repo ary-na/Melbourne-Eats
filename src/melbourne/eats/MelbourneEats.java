@@ -83,7 +83,7 @@ public class MelbourneEats {
 
         // Get input
         String input = Helper.getInput("Please enter a restaurant name:");
-        int selection;
+        int selection = 0;
 
         do {
             int counter = 1;
@@ -108,8 +108,22 @@ public class MelbourneEats {
 
             System.out.printf("%n%-2s %s", counter + ")", "Go to main menu");
 
-            // Get input
-            selection = Integer.parseInt(Helper.getInput("\n\nPlease select:"));
+
+            // Validate user selection
+            do {
+                try {
+                    // Get input
+                    selection = Integer.parseInt(Helper.getInput("\n\nPlease select:"));
+                    // Display error on condition
+                    if (selection > counter || selection <= 0) {
+                        System.out.println("- Error - Please select a number from list");
+                    }
+                    // Catch
+                } catch (NullPointerException | NumberFormatException e) {
+                    System.out.println("- Error - Please select a number from list");
+                }     // Loop on condition
+            } while (selection > counter || selection <= 0);
+            
 
             // Display food menu based on input
             for (int i = 0; i < selectedProvider.size(); i++) {
