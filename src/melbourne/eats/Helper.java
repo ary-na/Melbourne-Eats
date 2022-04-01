@@ -73,7 +73,7 @@ public class Helper {
     // Display providers based on selected category
     protected static void displayRestaurants(String category) {
 
-        int selection;
+        int selection = 0;
         ArrayList<Provider> selectedProvider = new ArrayList<>();
 
         do {
@@ -95,7 +95,21 @@ public class Helper {
             }
             System.out.printf("%n%-2s %s", counter + ")", "Go to main menu");
 
-            selection = Integer.parseInt(getInput("\n\nPlease select:"));
+
+            // Validate user selection
+            do {
+                try {
+                    selection = Integer.parseInt(getInput("\n\nPlease select:"));
+                    // Display error on condition
+                    if (selection > counter || selection <= 0) {
+                        System.out.println("- Error - Please select a number from list");
+                    }
+                    // Catch
+                } catch (NullPointerException | NumberFormatException e) {
+                    System.out.println("- Error - Please select a number from list");
+                }     // Loop on condition
+            } while (selection > counter || selection <= 0);
+
 
             // Pass the selected provider to displayFoodMenu method
             for (int i = 0; i < selectedProvider.size(); i++) {
@@ -178,7 +192,9 @@ public class Helper {
                     Double value = (Double) provider.getFoodItems().values().toArray()[i];
 
                     int finalQuantity = quantity;
-                    foodItem.put(foodItemNo, new LinkedHashMap<>(){{put(key, new Double[]{value, (double) finalQuantity});}});
+                    foodItem.put(foodItemNo, new LinkedHashMap<>() {{
+                        put(key, new Double[]{value, (double) finalQuantity});
+                    }});
                     foodItemNo++;
                 }
             }
