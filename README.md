@@ -1,4 +1,4 @@
-# Assignment 1 - Further Programming
+# Melbourne-Eats
 
 The system keeps a list of restaurants from which users can order their food. It allows users to order from different restaurants and receive discounts on the combined order. The restaurant's list is provided in the Restaurants.txt file, and discount information is provided in the Discounts.txt file.
 
